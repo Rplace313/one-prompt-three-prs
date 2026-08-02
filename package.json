@@ -1,0 +1,12 @@
+{
+  "name": "meridian-coffee",
+  "version": "1.0.0",
+  "description": "Order service for Meridian Coffee Roasters — workshop demo repo with three seeded bugs",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
