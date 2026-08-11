@@ -19,7 +19,16 @@ else
 fi
 
 if command -v gh >/dev/null && gh auth status >/dev/null 2>&1; then
-  ok "gh authenticated — agents can open real PRs"
+  perm=$(gh repo view "$(git remote get-url origin 2>/dev/null)" \
+    --json viewerPermission -q .viewerPermission 2>/dev/null || echo "NONE")
+  case "$perm" in
+    ADMIN|MAINTAIN|WRITE)
+      ok "gh authenticated with push access — agents will open real PRs" ;;
+    *)
+      echo "⚠ gh is authenticated but you can't push to this repo — agents stop at local branches."
+      echo "  Want real PRs in your own fork? Run:  gh repo fork --remote"
+      ;;
+  esac
 else
   echo "⚠ gh not authenticated — agents will stop at local branches (fine for the exercise)"
 fi

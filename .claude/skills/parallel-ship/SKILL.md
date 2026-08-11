@@ -21,7 +21,12 @@ arguments, use every file in `issues/`.
 3. Decide PR mode: if `gh auth status` succeeds AND the user has push access
    to `origin`, agents open PRs. Otherwise agents stop at a local branch —
    that is success, not failure. State which mode is active before fanning out.
-4. Derive per issue: a slug (file name minus number and extension), branch
+4. Fork guard (PR mode only): if an `upstream` remote exists, this checkout
+   is a fork. Run `gh repo set-default <owner>/<repo>` with origin's
+   owner/repo so PRs land on YOUR fork. Without it, `gh pr create` targets
+   the upstream parent repo — one you likely can't (and shouldn't) PR into —
+   or stalls prompting for a default.
+5. Derive per issue: a slug (file name minus number and extension), branch
    `fix/<slug>`, and a worktree directory as an ABSOLUTE sibling path of the
    repo: `../wt-<slug>`.
 

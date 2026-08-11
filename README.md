@@ -17,7 +17,8 @@ You will run one prompt. Claude Code will:
 - git 2.30+
 - Node 18+ (`node --version`)
 - [Claude Code](https://claude.com/claude-code) installed and logged in
-- Optional: `gh` CLI authenticated — turns branches into real PRs
+- Optional: `gh` CLI authenticated — one extra command (below) turns local
+  branches into real PRs in your own fork
 
 ## Setup (2 minutes)
 
@@ -29,6 +30,19 @@ git clone <this-repo> && cd one-prompt-three-prs
 `setup.sh` verifies your toolchain and runs the test suite — it should be
 green. (Yes, green: the seeded bugs live in behavior the current tests don't
 cover. That's the point.)
+
+**Have `gh` logged in?** You can't push to this repo, so out of the box your
+agents stop at local branches. One command upgrades them to real PRs — in
+your own fork, never in the workshop repo:
+
+```bash
+gh repo fork --remote
+```
+
+That forks the repo under your account and points `origin` at the fork
+(the original becomes `upstream`). The skill detects push access and
+switches to PR mode automatically. Skipping this is fine — branch mode is a
+designed outcome, not a failure.
 
 ## The exercise (attendees: two bugs)
 
