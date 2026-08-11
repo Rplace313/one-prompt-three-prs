@@ -86,4 +86,5 @@ tomorrow morning.
 | [02](issues/02-delivery-estimate-saturday.md) | Friday orders get an impossible Monday delivery estimate |
 | [03](issues/03-restock-report-zero-stock.md) | Sold-out items never appear on the restock report |
 
-Root causes are in `FACILITATOR.md` — don't peek until your agents report.
+Root causes stay with the facilitator — no peeking. Your agents will show
+you, failing test first.
