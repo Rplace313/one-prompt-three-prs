@@ -14,6 +14,18 @@ test('uncounted items are assumed at par', () => {
   assert.equal(needsRestock({ sku: 'GUA-1' }), false);
 });
 
+test('flags completely sold-out items (zero on hand) as needing restock', () => {
+  assert.equal(needsRestock({ sku: 'GUA-2', onHand: 0, parLevel: 24 }), true);
+});
+
+test('sold-out item is the most urgent line on the report', () => {
+  const report = restockReport([
+    { sku: 'A', name: 'Altura', onHand: 1, parLevel: 24 },
+    { sku: 'B', name: 'Guatemala Antigua', onHand: 0, parLevel: 24 },
+  ]);
+  assert.deepEqual(report.map((r) => r.sku), ['B', 'A']);
+});
+
 test('report is sorted scarcest first', () => {
   const report = restockReport([
     { sku: 'A', name: 'Altura', onHand: 5, parLevel: 24 },

@@ -7,7 +7,7 @@ const DEFAULT_PAR_LEVEL = 24;
 
 function needsRestock(item) {
   const parLevel = item.parLevel ?? DEFAULT_PAR_LEVEL;
-  const onHand = item.onHand || parLevel;
+  const onHand = item.onHand ?? parLevel;
   return onHand < parLevel * 0.25;
 }
 
