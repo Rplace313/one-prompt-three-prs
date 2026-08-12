@@ -23,3 +23,15 @@ test('rejects non-positive and fractional bag counts', () => {
   assert.throws(() => priceOrder(0), RangeError);
   assert.throws(() => priceOrder(2.5), RangeError);
 });
+
+test('an order of exactly 10 bags gets the 10% tier (issue 01)', () => {
+  const order = priceOrder(10);
+  assert.equal(order.discountPercent, 10);
+  assert.equal(order.totalCents, 10 * 1850 - Math.round(10 * 1850 * 0.10));
+});
+
+test('an order of exactly 25 bags gets the 20% tier, not 10% (issue 01)', () => {
+  const order = priceOrder(25);
+  assert.equal(order.discountPercent, 20);
+  assert.equal(order.totalCents, 25 * 1850 - Math.round(25 * 1850 * 0.20));
+});

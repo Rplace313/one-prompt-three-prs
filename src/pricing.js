@@ -10,7 +10,7 @@ const DISCOUNT_TIERS = [
 
 function discountPercentFor(bagCount) {
   for (const tier of DISCOUNT_TIERS) {
-    if (bagCount > tier.minBags) {
+    if (bagCount >= tier.minBags) {
       return tier.percent;
     }
   }
